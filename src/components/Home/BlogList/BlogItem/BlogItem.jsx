@@ -15,6 +15,8 @@ const BlogItem = ({
     id,
   },
 }) => {
+  let blognew = title.replace(/\s+/g, "-");
+  console.log(blognew);
   return (
     <div className="blogItem-wrap">
       <img src={cover} alt="cover" className="blogItem-cover" />
@@ -30,7 +32,8 @@ const BlogItem = ({
             <p>{createdAt}</p>
           </div>
         </div>
-        <Link to={`/blog/${title}`}>👉</Link>
+
+        <Link to={`/blog/${blognew}`}>👉</Link>
       </footer>
     </div>
   );

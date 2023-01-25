@@ -7,12 +7,14 @@ import "./style.css";
 
 const Blog = () => {
   const { title } = useParams();
+  // let title2 = title.replace(/\s+/g, "-");
+  // console.log(title2);
 
   const [blog, setBlog] = useState(null);
 
   useEffect(() => {
     let blog = blogList.find(
-      (blog) => blog.title.toString() === title.toString()
+      (blog) => blog.title.replace(/\s+/g, "-") === title
     );
 
     if (blog) {

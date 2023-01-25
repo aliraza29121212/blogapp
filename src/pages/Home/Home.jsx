@@ -8,23 +8,28 @@ import { blogList } from "../../config/data";
 const Home = () => {
   const [blogs, setBlogs] = useState(blogList);
   const [searchKey, setSearchKey] = useState("");
+  console.log(searchKey);
 
   // Search submit
-  const handleSearchBar = (e) => {
-    e.preventDefault();
-    console.log(e.target.val);
-
-    handleSearchResults();
-  };
+  // const handleSearchBar = (e) => {
+  //   e.preventDefault();
+  //   handleSearchResults();
+  // };
 
   // Search for blog by category
-  const handleSearchResults = () => {
-    const allBlogs = blogList;
-    const filteredBlogs = allBlogs.includes((blog) =>
-      blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
-    );
+  // let updatedList = [...blogList];
 
-    setBlogs(filteredBlogs);
+  const handleSearchResults = (e) => {
+    // const allBlogs = blogList;
+    // const filteredBlogs = allBlogs.filter((blog) =>
+    //   blog.category.toLowerCase().includes(searchKey.toLowerCase().trim())
+    // );
+    // setBlogs(filteredBlogs);
+    // blogs = blogs.filter(
+    //   (item) => item.toLowerCase().indexOf(searchKey.toLowerCase()) !== -1
+    // );
+    // setBlogs(blogs);
+    setSearchKey(e.target.value);
   };
 
   // Clear search and show all blogs
@@ -41,11 +46,15 @@ const Home = () => {
       <SearchBar
         value={searchKey}
         clearSearch={handleClearSearch}
-        formSubmit={handleSearchBar}
-        handleSearchKey={(e) => setSearchKey(e.target.value)}
+        // formSubmit={handleSearchResults}
+        handleSearchKey={handleSearchResults}
       />
       {/* {Blog List & Empty List} */}
-      {!blogs.length ? <EmptyList /> : <BlogList blogs={blogList} />}
+      {!blogs.length ? (
+        <EmptyList />
+      ) : (
+        <BlogList blogs={blogList} searchTerm={searchKey} />
+      )}
     </div>
   );
 };
